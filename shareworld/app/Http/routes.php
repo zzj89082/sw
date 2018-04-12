@@ -20,18 +20,35 @@
 
 
 //后台路由组，对后台路由进行统一管理
-Route::group(['middleware'=>'header'],function(){
+// Route::group(['middleware'=>'login'],function(){
 
 	//后台主页控制器
 	Route::get('/admin/index','Admin\AdminController@index');
 
 	//后台用户控制器
 	// Route::resource('/admin/user','Admin\UserController');
+	
+	//后台回收站列表控制器
+	Route::get('/admin/recover/list','Admin\RecoverController@list');
+	//后台广告回收站恢复控制器
+	Route::get('/admin/recover/update/{id}','Admin\RecoverController@update');
+	//后台广告回收站删除控制器
+	Route::get('/admin/recover/delete/{id}','Admin\RecoverController@delete');
+	//后台轮播回收站恢复控制器
+	Route::get('/admin/recover/rupdate/{id}','Admin\RecoverController@rupdate');
+	//后台轮播回收站删除控制器
+	Route::get('/admin/recover/rdelete/{id}','Admin\RecoverController@rdelete');
 
-	//后台广告控制器
-	Route::resource('/admin/poster','Admin\PosterController');
+	// //网站配置
+	// Route::controller('/admin/config','Admin\ConfigController');
 
-	//后台处理反馈控制器
-	Route::resource('/admin/feedback','Admin\FeedbackController');
 
-});
+	//网站配置
+	Route::get('/admin/config/index','Admin\ConfigController@index');
+	Route::post('/admin/config/add','Admin\ConfigController@add');
+	//更换轮播图
+	Route::get('/admin/config/rollimg','Admin\ConfigController@rollimg');
+	Route::post('/admin/config/insertimg','Admin\ConfigController@insertimg');
+	Route::get('/admin/config/delete/{id}','Admin\ConfigController@delete');
+
+// });

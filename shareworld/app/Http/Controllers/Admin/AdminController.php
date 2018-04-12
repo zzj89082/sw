@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Config;
+use App\Models\Rollimg;
 
-use DB;
-use App\User;
 class AdminController extends Controller
 {
     /**
@@ -18,13 +18,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //简单调试工具
         $login = true;
         // $login = false;
 
-        //判断跳转页面
-        if($login == true){
-            return view('admin/index');
+
+        if($login == true){  
+            //获取网站配置
+            $data = Config::find(1);
+            $rollimg = Rollimg::get();
+            session(['data'=>$data]);
+            return view('admin/index',['data'=>$data,'rollimg'=>$rollimg]);
         } else {
             return view('admin/login/login');
         }
